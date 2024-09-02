@@ -1,10 +1,11 @@
-const axios = require('axios');
+
 require("dotenv").config();
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 
 exports. sendMessage=async(req,res)=>{
     try{
-        const { GoogleGenerativeAI } = require("@google/generative-ai");
 const geminiApiKey = process.env.API_KEY;
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
