@@ -23,14 +23,23 @@ const model = genAI.getGenerativeModel({
     responseMimeType: "text/plain",
   };
 
- 
+
+  let history= req.body.allMessages;
+  const convertMessagesToHistory = (messages) => {
+    return messages.map((message) => ({
+      role: message.sender === 'user' ? 'user' : 'model',
+      parts: [{ text: message.text }],
+    }));
+  };
+
+  history=convertMessagesToHistory(history);
     const chatSession = model.startChat({
-      generationConfig
+      generationConfig,
+      history
           });
-          console.log("here");
-          console.log(req)
+         
     const result = await chatSession.sendMessage(req.body.text);
-    console.log("here100");
+
     
     return res.status(200).json({
         success:true,
