@@ -12,7 +12,10 @@ app.use(
 
 
 const chatbotRoutes=require("./Routes/chatbot");
+const paymentRoutes=require("./Routes/payment");
 app.use("/api",chatbotRoutes)
+app.use("/api",paymentRoutes)
+
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

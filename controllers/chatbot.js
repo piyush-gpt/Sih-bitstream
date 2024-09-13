@@ -83,35 +83,6 @@ const generationConfig = {
          
     const result = await chatSession.sendMessage(req.body.text);
    
-    if(req.body.text==="RETURN BOOKING INFORMATION"){
-      let mailContent=extractBookingDetailsFromString(result.response.text());
-      let museumName=mailContent.museumName;
-      let visitorNum=mailContent.visitorNum;
-      let visitors=mailContent.visitors;
-      const visitorDetails = visitors.map(visitor => `${visitor.name} (age ${visitor.age})`).join('\n');
-      let text= `
-      Hello,
-  
-      Your ticket booking for the ${museumName} has been confirmed.
-  
-      Number of Tickets: ${visitorNum}
-  
-      Visitor Information:
-      ${visitorDetails}
-  
-      Thank you for your booking. Enjoy your visit!
-  
-      Best regards,
-      Museum Ticketing Service
-      `
-
-
-      mailSender("piyushthegreat1@gmail.com", `Your Ticket Booking for ${museumName}`, text);
-      
-    }
-
-
-
     
     return res.status(200).json({
         success:true,
